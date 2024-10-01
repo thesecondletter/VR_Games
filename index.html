@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drinking Game</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F0F4F8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+            }
+
+        h1 {
+            font-size: 24px;
+            color: #34495E;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .button {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .button:hover {
+                background-color: #2980B9;
+                transform: translateY(-5px);
+            }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="card">
+        <h1 id="cardText"></h1>
+        <button class="button" onclick="generateCard()">Another one 🍻</button>
+    </div>
+
+    <script>
+        const cards = [
+            "You and the person to your left both drink 2 shots.",
+            "Whoever last used the bathroom drinks 3 shots.",
+            "Everyone wearing glasses drinks a shot.",
+            "The person with the longest hair drinks 2 shots.",
+            "Whoever has their phone out drinks 2 shots.",
+            "Whoever laughs first drinks 1 shot.",
+            "Everyone with a tattoo drinks a shot.",
+            "Whoever is the youngest drinks 2 shots.",
+            "Last person to say 'cheers' drinks 2 shots.",
+            "Whoever is the oldest drinks 3 shots.",
+            "Every person wearing black drinks a shot.",
+            "You must speak in rhyme for 2 turns, or drink 3 shots.",
+            "Whoever has a pet drinks a shot.",
+            "Whoever can do the best impression of you picks someone to drink 3 shots.",
+            "The person to your right drinks 1 shot.",
+            "Whoever has traveled the furthest from home drinks 2 shots.",
+            "Last person to touch their nose drinks 2 shots.",
+            "Whoever can name the most states drinks 1 shot and picks someone to drink 2 shots.",
+            "Everyone not wearing socks drinks 2 shots.",
+            "Whoever can name the most capital cities gives out 3 shots.",
+            "Swap drinks with the person across from you, or take 2 shots.",
+            "Sing the chorus of a song, or drink 3 shots.",
+            "Whoever was born closest to the current month drinks 2 shots.",
+            "The first person to dance gives out 2 shots.",
+            "Whoever has the most siblings drinks 3 shots.",
+            "The person who most recently sent a text drinks 2 shots.",
+            "Whoever can do the best animal sound gives out 2 shots.",
+            "Play rock-paper-scissors with the person next to you. Loser drinks 2 shots.",
+            "Whoever has their phone charged the most drinks 3 shots.",
+            "Last person to stand up drinks 2 shots.",
+            "The person with the next birthday drinks 2 shots.",
+            "Everyone who has lived in more than one country drinks a shot.",
+            "Whoever can name the most celebrities drinks 2 shots.",
+            "Point to someone who has to drink 2 shots with you.",
+            "Make a funny face. Whoever laughs drinks 2 shots.",
+            "Whoever can touch their toes picks someone to drink 3 shots.",
+            "Everyone with blue eyes drinks 1 shot.",
+            "Take a shot without using your hands, or drink 2 extra shots.",
+            "Last person to clap drinks 2 shots.",
+            "Whoever can whistle drinks 2 shots.",
+            "Whoever last took a selfie drinks 2 shots.",
+            "The person to your left drinks 1 shot.",
+            "Whoever knows the most movie quotes gives out 3 shots.",
+            "Last person to blink drinks 2 shots.",
+            "If you have more than 3 apps open on your phone, drink 2 shots.",
+            "Everyone who’s broken a bone drinks a shot.",
+            "Whoever has eaten the most food today drinks 2 shots.",
+            "Whoever’s been awake the longest drinks 2 shots.",
+            "You get to assign 2 shots to anyone.",
+            "Whoever was up the latest last night drinks 2 shots.",
+            "The person wearing the most colors drinks 1 shot.",
+            "Whoever can do the most push-ups picks someone to drink 3 shots.",
+            "Everyone taller than you drinks a shot.",
+            "You and the person across from you both drink 1 shot.",
+            "Whoever can name the most sports teams drinks 2 shots.",
+            "Whoever was the last to shower drinks 2 shots.",
+            "Whoever has a piercing drinks 1 shot.",
+            "Whoever can hold their breath the longest gives out 2 shots.",
+            "Whoever has driven the furthest today drinks 2 shots.",
+            "Last person to compliment someone drinks 3 shots.",
+            "Whoever has painted nails drinks 1 shot.",
+            "Whoever has been in the most countries drinks 3 shots.",
+            "Swap seats with anyone, or take 2 shots.",
+            "Whoever has watched the most episodes of a TV series drinks 2 shots.",
+            "The first person to stand on one leg gives out 2 shots.",
+            "Whoever has the newest phone drinks 1 shot.",
+            "First person to name 3 types of beer gives out 3 shots.",
+            "Everyone who has ever lost their keys drinks 2 shots.",
+            "The person who last ate fast food drinks 2 shots.",
+            "Whoever has the most apps on their phone drinks 1 shot.",
+            "The person with the best party trick picks someone to drink 2 shots.",
+            "Whoever has the longest name drinks 2 shots.",
+            "Last person to laugh drinks 3 shots.",
+            "Whoever can name the most countries gives out 2 shots.",
+            "First person to touch their toes gives out 2 shots.",
+            "Whoever has the most unread emails drinks 2 shots.",
+            "Everyone who prefers dogs over cats drinks a shot.",
+            "Whoever can name the most languages gives out 2 shots.",
+            "Whoever has the shortest hair drinks 2 shots.",
+            "Last person to finish their drink drinks 3 shots.",
+            "Whoever has an item in their pocket drinks 1 shot.",
+            "Whoever has the most shoes at home drinks 2 shots.",
+            "The person with the nicest shoes drinks 1 shot.",
+            "First person to make an animal sound gives out 2 shots.",
+            "Last person to check their phone drinks 2 shots.",
+            "Whoever has been in the most cars today drinks 2 shots.",
+            "Whoever has eaten the least today drinks 2 shots.",
+            "You and the person next to you drink 2 shots.",
+            "Whoever has the coolest phone case drinks 1 shot.",
+            "The person with the most change in their pocket drinks 2 shots.",
+            "Whoever can do the best dance move picks someone to drink 3 shots.",
+            "First person to finish their drink gives out 2 shots.",
+            "Whoever has the oldest phone drinks 2 shots.",
+            "Last person to make eye contact with you drinks 2 shots.",
+            "First person to touch their nose gives out 2 shots.",
+            "Whoever can name the most types of alcohol drinks 1 shot.",
+            "Whoever has the most contacts on their phone drinks 2 shots.",
+            "Everyone with a smartwatch drinks 1 shot.",
+            "Whoever has been to the most concerts drinks 2 shots.",
+            "Whoever can sing the best gives out 3 shots."
+        ];
+
+        // Function to generate a random card
+        function generateCard() {
+            const randomCard = cards[Math.floor(Math.random() * cards.length)];
+            document.getElementById('cardText').innerText = randomCard;
+        }
+
+        // Generate a random card when the page loads
+        window.onload = generateCard;
+    </script>
+
+</body>
+</html>
